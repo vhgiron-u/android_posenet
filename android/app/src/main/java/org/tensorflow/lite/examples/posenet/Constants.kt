@@ -22,5 +22,9 @@ package org.tensorflow.lite.examples.posenet
 const val REQUEST_CAMERA_PERMISSION = 1
 
 /** Model input shape for images.   */
-const val MODEL_WIDTH = 257
-const val MODEL_HEIGHT = 257
+//dluvizon2D:
+const val MODEL_WIDTH = 256
+const val MODEL_HEIGHT = 256
+////posenet:
+//const val MODEL_WIDTH = 257
+//const val MODEL_HEIGHT = 257
