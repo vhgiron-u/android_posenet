@@ -68,20 +68,50 @@ class PosenetActivity :
   Fragment(),
   ActivityCompat.OnRequestPermissionsResultCallback {
 
+  //:vh: editing this is enough to draw/notdraw lines
   /** List of body joints that should be connected.    */
   private val bodyJoints = listOf(
-    Pair(BodyPart.LEFT_WRIST, BodyPart.LEFT_ELBOW),
-    Pair(BodyPart.LEFT_ELBOW, BodyPart.LEFT_SHOULDER),
-    Pair(BodyPart.LEFT_SHOULDER, BodyPart.RIGHT_SHOULDER),
-    Pair(BodyPart.RIGHT_SHOULDER, BodyPart.RIGHT_ELBOW),
-    Pair(BodyPart.RIGHT_ELBOW, BodyPart.RIGHT_WRIST),
-    Pair(BodyPart.LEFT_SHOULDER, BodyPart.LEFT_HIP),
-    Pair(BodyPart.LEFT_HIP, BodyPart.RIGHT_HIP),
-    Pair(BodyPart.RIGHT_HIP, BodyPart.RIGHT_SHOULDER),
-    Pair(BodyPart.LEFT_HIP, BodyPart.LEFT_KNEE),
-    Pair(BodyPart.LEFT_KNEE, BodyPart.LEFT_ANKLE),
-    Pair(BodyPart.RIGHT_HIP, BodyPart.RIGHT_KNEE),
-    Pair(BodyPart.RIGHT_KNEE, BodyPart.RIGHT_ANKLE)
+    Pair(BodyPart.PA16J_00, BodyPart.PA16J_01),
+    Pair(BodyPart.PA16J_01, BodyPart.PA16J_02),
+    Pair(BodyPart.PA16J_02, BodyPart.PA16J_03),
+    Pair(BodyPart.PA16J_04, BodyPart.PA16J_06),
+    Pair(BodyPart.PA16J_06, BodyPart.PA16J_08),
+    Pair(BodyPart.PA16J_05, BodyPart.PA16J_07),
+    Pair(BodyPart.PA16J_07, BodyPart.PA16J_09),
+    Pair(BodyPart.PA16J_10, BodyPart.PA16J_12),
+    Pair(BodyPart.PA16J_12, BodyPart.PA16J_14),
+    Pair(BodyPart.PA16J_11, BodyPart.PA16J_13),
+    Pair(BodyPart.PA16J_13, BodyPart.PA16J_15)
+  )
+
+//  private val bodyJoints = listOf(
+//    Pair(BodyPart.LEFT_WRIST, BodyPart.LEFT_ELBOW), //larm
+//    Pair(BodyPart.LEFT_ELBOW, BodyPart.LEFT_SHOULDER), //larm
+//    Pair(BodyPart.LEFT_SHOULDER, BodyPart.RIGHT_SHOULDER), //shoulder union (horizontal side of square)
+//    Pair(BodyPart.RIGHT_SHOULDER, BodyPart.RIGHT_ELBOW), //rarm
+//    Pair(BodyPart.RIGHT_ELBOW, BodyPart.RIGHT_WRIST), //rarm
+//    Pair(BodyPart.LEFT_SHOULDER, BodyPart.LEFT_HIP), //vertical side of square
+//    Pair(BodyPart.LEFT_HIP, BodyPart.RIGHT_HIP), //hip union (horizontal side of square)
+//    Pair(BodyPart.RIGHT_HIP, BodyPart.RIGHT_SHOULDER), //vertical side of square
+//    Pair(BodyPart.LEFT_HIP, BodyPart.LEFT_KNEE), //lleg
+//    Pair(BodyPart.LEFT_KNEE, BodyPart.LEFT_ANKLE), //lleg
+//    Pair(BodyPart.RIGHT_HIP, BodyPart.RIGHT_KNEE), //rleg
+//    Pair(BodyPart.RIGHT_KNEE, BodyPart.RIGHT_ANKLE) //rleg
+//  )
+
+  /** List of body joints (DLuv2D) that should be connected. See pa16j.links */
+  private val bodyJointsDLuv2D = listOf(
+    Pair(0, 1),
+    Pair(1, 2),
+    Pair(2, 3),
+    Pair(4, 6),
+    Pair(6, 8),
+    Pair(5, 7),
+    Pair(7, 9),
+    Pair(10, 12),
+    Pair(12, 14),
+    Pair(11, 13),
+    Pair(13, 15)
   )
 
   /** Threshold for confidence score. */
@@ -535,6 +565,7 @@ class PosenetActivity :
         canvas.drawCircle(adjustedX, adjustedY, circleRadius, paint)
       }
     }
+
 
     for (line in bodyJoints) {
       if (
